@@ -39,6 +39,9 @@ def add_months(start: date, months: int):
 def generate_schedule(principal_cents: int, rate_bp: int, payment_cents: int,
                       start_date: date, max_months: int = MAX_MONTHS):
 
+    first_interest = monthly_interest_cents(principal_cents, rate_bp)
+    if payment_cents <= first_interest:
+        raise ValueError("Payment is too low to cover interest, please increase the payment.")
     balance = principal_cents
     cumulative_interest = 0
     cumulative_principal = 0
@@ -66,11 +69,13 @@ def generate_schedule(principal_cents: int, rate_bp: int, payment_cents: int,
         })
 
     paid_off = balance == 0
+    capped = not paid_off
     return {
         "rows": rows,
         "months": len(rows),
         "total_interest_cents": cumulative_interest,
         "final_balance_cents": balance,
+        "capped": capped,
         "payoff_date": add_months(start_date, len(rows)) if paid_off else None,
     }
 
