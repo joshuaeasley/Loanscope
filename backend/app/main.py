@@ -1,6 +1,7 @@
 from datetime import date
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
+from fastapi.middleware.cors import CORSMiddleware
 from app.engine import (
     dollars_to_cents,
     cents_to_dollars,
@@ -9,6 +10,7 @@ from app.engine import (
 )
 
 app = FastAPI()
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 @app.get("/health")
 def health():
