@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchSchedule } from "./api";
 import SliderField from "./components/SliderField";
+import Summary from "./components/Summary";
 
 function App() {
   const [principal, setPrincipal] = useState(200000);
@@ -47,11 +48,11 @@ function App() {
     <div>
       <h1>LoanScope</h1>
       <SliderField
-      label="Principal"
+      label="Principal ($)"
       value={principal}
       min={1}
-      max={1000000}
-      step={1000}
+      max={100000000}
+      step={1}
       onChange={(value, source) => handleChange(setPrincipal, value, source)}
       />
       <SliderField
@@ -71,11 +72,7 @@ function App() {
         onChange={(value, source) => handleChange(setPayment, value, source)}
       />
       {error && <p role="alert">Error: {error}</p>}
-      {result && (
-        <p>
-          {result.months} months, total interest ${result.total_interest}
-        </p>
-      )}
+      {result && <Summary result={result} />}
     </div>
   );
 }

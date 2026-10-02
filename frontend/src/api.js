@@ -20,4 +20,5 @@ export async function fetchSchedule(loan) {
 
     throw new Error(message);
   }
+  return data;
 }
