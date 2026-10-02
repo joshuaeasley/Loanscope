@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchSchedule } from "./api";
+import SliderField from "./components/SliderField";
 
 function App() {
   const [principal, setPrincipal] = useState(200000);
@@ -30,6 +31,14 @@ function App() {
   return (
     <div>
       <h1>LoanScope</h1>
+      <SliderField
+      label="Principal"
+      value={principal}
+      min={1}
+      max={1000000}
+      step={1000}
+      onChange={setPrincipal}
+      />
       {error && <p>Error: {error}</p>}
       {result && (
         <p>
