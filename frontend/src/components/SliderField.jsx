@@ -9,7 +9,7 @@ function SliderField({ label, value, min, max, step, onChange }) {
         max={max}
         step={step}
         value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
+        onChange={(event) => onChange(Number(event.target.value), "slider")}
       />
       <input
         type="number"
@@ -18,7 +18,7 @@ function SliderField({ label, value, min, max, step, onChange }) {
         max={max}
         step={step}
         value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
+        onChange={(event) => onChange(Number(event.target.value), "number")}
       />
     </div>
   );
