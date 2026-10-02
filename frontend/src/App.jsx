@@ -23,6 +23,7 @@ function App() {
       })
       .catch((err) => {
         if (ignore) return;
+        setResult(null);
         setError(err.message);
       });
 
@@ -58,7 +59,7 @@ function App() {
         step={1}
         onChange={setPayment}
       />
-      {error && <p>Error: {error}</p>}
+      {error && <p role="alert">Error: {error}</p>}
       {result && (
         <p>
           {result.months} months, total interest ${result.total_interest}

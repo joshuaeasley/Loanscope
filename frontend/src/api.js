@@ -9,10 +9,15 @@ export async function fetchSchedule(loan) {
   const data = await response.json();
 
   if (!response.ok) {
-    // 400 gives detail as a string, 422 gives it as a list
-    const message =
-      typeof data.detail === "string" ? data.detail : "Invalid input.";
+    let message = "Something went wrong.";
+
+    if (typeof data.detail === "string") {
+      message = data.detail;
+    } else if (Array.isArray(data.detail)) {
+      const first = data.detail[0];
+      message = `${first.loc[1]}: ${first.msg}`;
+    }
+
     throw new Error(message);
   }
-  return data;
 }

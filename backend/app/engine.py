@@ -41,7 +41,7 @@ def generate_schedule(principal_cents: int, rate_bp: int, payment_cents: int,
 
     first_interest = monthly_interest_cents(principal_cents, rate_bp)
     if payment_cents <= first_interest:
-        raise ValueError("Payment is too low to cover interest, please increase the payment.")
+        raise ValueError("Payment is too low to cover the monthly interest, so the loan would never be paid off. Please increase the payment.")
     balance = principal_cents
     cumulative_interest = 0
     cumulative_principal = 0
