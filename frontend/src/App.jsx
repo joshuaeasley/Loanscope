@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchSchedule } from "./api";
 import { readScenarioFromUrl } from "./scenarioURL";
+import { formatCurrency } from "./formatCurrency";
 import SliderField from "./components/SliderField";
 import Summary from "./components/Summary";
 import BalanceChart from "./components/BalanceChart";
@@ -95,6 +96,12 @@ function App() {
       {result && <Summary result={result} />}
       {result && <BalanceChart rows={result.rows} />}
       {result && <ScheduleTable rows={result.rows} />}
+
+      <p>
+      <strong>Disclaimer: </strong> This output is an illustrative estimate, not financial
+      advice, and may not exactly match a lender's actual amortization terms
+      (which can include fees, escrow, or non-monthly compounding).
+      </p>
     </div>
   );
 }

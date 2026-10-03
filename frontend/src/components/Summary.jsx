@@ -1,3 +1,4 @@
+import { formatCurrency } from "../formatCurrency";
 function Summary({ result }) {
   const payoffText = result.payoff_date ? result.payoff_date : "N/A";
 
@@ -9,7 +10,7 @@ function Summary({ result }) {
       <p>
         Term: {result.term_years} years, {result.term_months} months
       </p>
-      <p>Total interest: ${result.total_interest.toFixed(2)}</p>
+      <p>Total interest: {formatCurrency(result.total_interest)}</p>
     </div>
   );
 }

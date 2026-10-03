@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatCurrency } from "../formatCurrency";
 import {
   LineChart,
   Line,
@@ -16,8 +17,8 @@ function ChartTooltip({ active, payload }) {
   return (
     <div style={{ background: "#222", border: "1px solid #888", padding: 8 }}>
       <p>Month {row.payment_number}</p>
-      <p>Balance: ${row.balance.toFixed(2)}</p>
-      <p>Cumulative interest: ${row.cumulative_interest.toFixed(2)}</p>
+      <p>Balance: {formatCurrency(row.balance)}</p>
+      <p>Cumulative interest: {formatCurrency(row.cumulative_interest)}</p>
     </div>
   );
 }

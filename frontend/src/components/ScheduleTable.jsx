@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatCurrency } from "../formatCurrency";
 
 const PAGE_SIZE = 12;
 
@@ -57,10 +58,10 @@ function ScheduleTable({ rows }) {
               {visibleRows.map((row) => (
                 <tr key={row.payment_number}>
                   <td>{row.payment_number}</td>
-                  <td>${row.payment.toFixed(2)}</td>
-                  <td>${row.principal.toFixed(2)}</td>
-                  <td>${row.interest.toFixed(2)}</td>
-                  <td>${row.balance.toFixed(2)}</td>
+                  <td>{formatCurrency(row.payment)}</td>
+                  <td>{formatCurrency(row.principal)}</td>
+                  <td>{formatCurrency(row.interest)}</td>
+                  <td>{formatCurrency(row.balance)}</td>
                 </tr>
               ))}
             </tbody>
