@@ -3,6 +3,7 @@ import { fetchSchedule } from "./api";
 import SliderField from "./components/SliderField";
 import Summary from "./components/Summary";
 import BalanceChart from "./components/BalanceChart";
+import ScheduleTable from "./components/ScheduleTable";
 
 function App() {
   const [principal, setPrincipal] = useState(200000);
@@ -75,6 +76,7 @@ function App() {
       {error && <p role="alert">Error: {error}</p>}
       {result && <Summary result={result} />}
       {result && <BalanceChart rows={result.rows} />}
+      {result && <ScheduleTable rows={result.rows} />}
     </div>
   );
 }
