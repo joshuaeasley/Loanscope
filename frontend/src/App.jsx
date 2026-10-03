@@ -5,6 +5,7 @@ import SliderField from "./components/SliderField";
 import Summary from "./components/Summary";
 import BalanceChart from "./components/BalanceChart";
 import ScheduleTable from "./components/ScheduleTable";
+import ShareButton from "./components/ShareButton";
 
 const initial = readScenarioFromUrl();
 
@@ -84,6 +85,11 @@ function App() {
         max={maxPayment}
         step={1}
         onChange={(value, source) => handleChange(setPayment, value, source)}
+      />
+      <ShareButton
+        principal={principal}
+        interestRate={interestRate}
+        payment={payment}
       />
       {error && <p role="alert">Error: {error}</p>}
       {result && <Summary result={result} />}
