@@ -4,6 +4,7 @@ function Summary({ result }) {
   return (
     <div>
       <h2>Summary</h2>
+      {result.capped && <p role="alert">{result.message}</p>}
       <p>Payoff date: {payoffText}</p>
       <p>
         Term: {result.term_years} years, {result.term_months} months
