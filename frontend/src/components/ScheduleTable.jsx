@@ -36,7 +36,7 @@ function ScheduleTable({ rows }) {
   }
 
   return (
-    <div>
+    <div className="card">
       <h2>Schedule</h2>
       <button onClick={() => setOpen(!open)} aria-expanded={open}>
         {open ? "Hide schedule" : "Show schedule"}

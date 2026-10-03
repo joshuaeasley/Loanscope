@@ -3,7 +3,7 @@ function Summary({ result }) {
   const payoffText = result.payoff_date ? result.payoff_date : "N/A";
 
   return (
-    <div>
+    <div className="card">
       <h2>Summary</h2>
       {result.capped && <p role="alert">{result.message}</p>}
       <p>Payoff date: {payoffText}</p>

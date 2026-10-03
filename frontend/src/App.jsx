@@ -54,7 +54,7 @@ function App() {
   }, [principal, interestRate, payment]);
 
   return (
-    <div>
+    <div className="app">
       <h1>LoanScope</h1>
       {urlProblems.length > 0 && (
         <div role="alert">

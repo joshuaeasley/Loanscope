@@ -1,7 +1,9 @@
 function SliderField({ label, value, min, max, step, onChange }) {
+  const id = "field-" + label.replace(/[^a-zA-Z]/g, "");
+
   return (
-    <div>
-      <label>{label}</label>
+    <div className="field">
+      <label htmlFor={id}>{label}</label>
       <input
         type="range"
         aria-label={`${label} slider`}
@@ -13,7 +15,7 @@ function SliderField({ label, value, min, max, step, onChange }) {
       />
       <input
         type="number"
-        aria-label={`${label} value`}
+        id={id}
         min={min}
         max={max}
         step={step}

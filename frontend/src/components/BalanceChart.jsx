@@ -15,7 +15,7 @@ function ChartTooltip({ active, payload }) {
   const row = payload[0].payload;
 
   return (
-    <div style={{ background: "#222", border: "1px solid #888", padding: 8 }}>
+        <div style={{background: "#222", color: "#fff", border: "1px solid #888", padding: 8}}>
       <p>Month {row.payment_number}</p>
       <p>Balance: {formatCurrency(row.balance)}</p>
       <p>Cumulative interest: {formatCurrency(row.cumulative_interest)}</p>
@@ -27,7 +27,7 @@ function BalanceChart({ rows }) {
   const [showInterest, setShowInterest] = useState(false);
 
   return (
-    <div>
+    <div className="card">
       <h2>Remaining balance</h2>
 
       <label htmlFor="interest-toggle">
