@@ -1,16 +1,44 @@
+import { useState } from "react";
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
   CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
+function ChartTooltip({ active, payload }) {
+  if (!active || !payload || payload.length === 0) return null;
+  const row = payload[0].payload;
+
+  return (
+    <div style={{ background: "#222", border: "1px solid #888", padding: 8 }}>
+      <p>Month {row.payment_number}</p>
+      <p>Balance: ${row.balance.toFixed(2)}</p>
+      <p>Cumulative interest: ${row.cumulative_interest.toFixed(2)}</p>
+    </div>
+  );
+}
+
 function BalanceChart({ rows }) {
+  const [showInterest, setShowInterest] = useState(false);
+
   return (
     <div>
       <h2>Remaining balance</h2>
+
+      <label htmlFor="interest-toggle">
+        <input
+          type="checkbox"
+          id="interest-toggle"
+          checked={showInterest}
+          onChange={(event) => setShowInterest(event.target.checked)}
+        />
+        Show cumulative interest paid
+      </label>
+
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={rows}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -19,6 +47,7 @@ function BalanceChart({ rows }) {
             label={{ value: "Month", position: "insideBottom", offset: -5 }}
           />
           <YAxis width={90} />
+          <Tooltip content={<ChartTooltip />} />
           <Line
             type="monotone"
             dataKey="balance"
@@ -26,6 +55,15 @@ function BalanceChart({ rows }) {
             dot={false}
             isAnimationActive={false}
           />
+          {showInterest && (
+            <Line
+              type="monotone"
+              dataKey="cumulative_interest"
+              stroke="#82ca9d"
+              dot={false}
+              isAnimationActive={false}
+            />
+          )}
         </LineChart>
       </ResponsiveContainer>
     </div>
