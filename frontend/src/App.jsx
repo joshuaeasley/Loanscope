@@ -1,14 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { fetchSchedule } from "./api";
+import { readScenarioFromUrl } from "./scenarioURL";
 import SliderField from "./components/SliderField";
 import Summary from "./components/Summary";
 import BalanceChart from "./components/BalanceChart";
 import ScheduleTable from "./components/ScheduleTable";
 
+const initial = readScenarioFromUrl();
+
 function App() {
-  const [principal, setPrincipal] = useState(200000);
-  const [interestRate, setInterestRate] = useState(6.5);
-  const [payment, setPayment] = useState(1500);
+  const [principal, setPrincipal] = useState(initial.scenario.principal);
+  const [interestRate, setInterestRate] = useState(initial.scenario.interestRate);
+  const [payment, setPayment] = useState(initial.scenario.payment);
+  const [urlProblems, setUrlProblems] = useState(initial.problems);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
 
@@ -17,6 +21,7 @@ function App() {
 
   function handleChange(setter, value, source) {
     delayRef.current = source === "number" ? 300 : 0;
+    setUrlProblems([]);
     setter(value);
   }
 
@@ -49,6 +54,13 @@ function App() {
   return (
     <div>
       <h1>LoanScope</h1>
+      {urlProblems.length > 0 && (
+        <div role="alert">
+          {urlProblems.map((message) => (
+            <p key={message}>{message}</p>
+          ))}
+        </div>
+      )}
       <SliderField
       label="Principal ($)"
       value={principal}
